@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders | Queueless Canteen</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .order-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+      margin-bottom: 15px;
+    }
+
+    .order-info {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: #0f5132;
+      margin-bottom: 8px;
+    }
+
+    .order-items ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #495057;
+    }
+
+    .status-steps {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #e9ecef;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .step.active {
+      background: #0f5132;
+      color: #fff;
+    }
+
+    .pay-btn {
+      margin-top: 10px;
+      background: #ff9f45;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .pay-btn:hover {
+      background: #f08c2e;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Queueless Canteen</div>
+  <button class="cta-btn" onclick="history.back()">Back</button>
+</nav>
+
+<div class="student-order-container">
+  <h2>My Orders</h2>
+  <div class="orders-container" id="ordersContainer"></div>
+</div>
+
+<script>
+let orders = JSON.parse(localStorage.getItem("studentOrders")) || [];
+const ordersContainer = document.getElementById("ordersContainer");
+
+// Render orders
+function renderOrders() {
+  ordersContainer.innerHTML = "";
+
+  if(orders.length===0){
+    ordersContainer.innerHTML="<p>No orders yet.</p>";
+    return;
+  }
+
+  orders.forEach(order=>{
+    const card = document.createElement("div");
+    card.className="order-card";
+
+    card.innerHTML=`
+      <div class="order-info">
+        <span>Order #${order.orderNo}</span>
+        <span>₹${order.total}</span>
+      </div>
+
+      <div class="order-items">
+        <strong>Items:</strong>
+        <ul>
+          ${order.items.map(i=>`<li>${i.name} x${i.quantity}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="status-steps">
+        ${["Pending","Preparing","Ready","Collected","Paid"]
+          .map(s=>`<span class="step ${order.status===s?"active":""}">${s}</span>`).join("")}
+      </div>
+
+      ${
+        order.status==="Ready"
+        ? `<button class="pay-btn" onclick="goToPayment(${order.orderNo})">Pay Now</button>`
+        : order.status==="Paid"
+        ? `<span style="color:green;font-weight:600;">Paid ✅</span>`
+        : ""
+      }
+    `;
+
+    ordersContainer.appendChild(card);
+  });
+}
+
+
+// Redirect to payment page
+function goToPayment(orderNo){
+  localStorage.setItem("currentPaymentOrder", orderNo.toString());
+  window.location.href = "payment.html"; // your payment page
+}
+
+
+// Refresh orders every 2 sec
+setInterval(()=>{
+  orders = JSON.parse(localStorage.getItem("studentOrders")) || [];
+  renderOrders();
+},2000);
+
+renderOrders();
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canteen Dashboard | Queueless Canteen</title>
+  <link rel="stylesheet" href="canteen.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+ <nav class="navbar">
+  <div class="logo">Queueless Canteen</div>
+  <div class="nav-links">
+    <span class="user-name">Hello, Staff</span>
+    <!-- Add Orders link -->
+    <a href="canteen-orders.html" class="cta-btn">Orders</a>
+    <button class="cta-btn">Logout</button>
+  </div>
+</nav>
+
+
+<!-- MAIN CONTAINER -->
+<div class="canteen-container">
+
+  <!-- LEFT: MENU MANAGEMENT -->
+  <section class="menu-section">
+    <h2 class="section-title">Manage Menu 🍽️</h2>
+
+    <!-- CATEGORY FILTER -->
+    <div class="category-tabs">
+  <button class="active" onclick="filterCategory('breakfast', event)">Breakfast</button>
+  <button onclick="filterCategory('lunch', event)">Lunch</button>
+  <button onclick="filterCategory('snacks', event)">Snacks</button>
+  <button onclick="filterCategory('beverages', event)">Beverages</button>
+  <button onclick="filterCategory('all', event)">All</button>
+    </div>
+
+
+    <!-- MENU GRID -->
+    <div class="menu-grid">
+
+      <!-- Example Item -->
+      <div class="food-card" data-category="breakfast">
+        <img src="images/idli-sambar.jpg" alt="Idli Sambar">
+        <div class="card-content">
+          <span class="item-name">Idli Sambar</span>
+          <span class="item-price">₹30</span>
+          <select class="availability">
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+
+      <div class="food-card" data-category="lunch">
+        <img src="images/veg-biryani.jpg" alt="Veg Meals">
+        <div class="card-content">
+          <span class="item-name">Veg Meals</span>
+          <span class="item-price">₹70</span>
+          <select class="availability">
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+
+      <!-- Add more items as needed -->
+
+    </div>
+
+    <button class="add-item-btn">➕ Add New Item</button>
+  </section>
+
+  <!-- RIGHT: SUMMARY PANEL -->
+  <aside class="summary-section">
+    <h3>Summary 📝</h3>
+    <p>Total Items: <span id="totalItems">0</span></p>
+    <p>Available: <span id="availableItems">0</span></p>
+    <p>Unavailable: <span id="unavailableItems">0</span></p>
+  </aside>
+
+</div>
+
+<script src="canteen.js"></script>
+</body>
+</html>

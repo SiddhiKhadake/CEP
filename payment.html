@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment | Queueless Canteen</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f5132;
+      padding: 12px 20px;
+      color: #fff;
+    }
+
+    .navbar .logo {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .navbar .cta-btn {
+      background: #ff9f45;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .navbar .cta-btn:hover {
+      background: #f08c2e;
+    }
+
+    .student-order-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .student-order-container h2 {
+      text-align: center;
+      color: #0f5132;
+      margin-bottom: 20px;
+    }
+
+    #paymentInfo {
+      margin-top: 20px;
+    }
+
+    #paymentInfo p {
+      font-size: 16px;
+      margin: 8px 0;
+      color: #495057;
+    }
+
+    #paymentInfo ul {
+      padding-left: 20px;
+      color: #495057;
+      margin-bottom: 20px;
+    }
+
+    #paymentInfo ul li {
+      margin: 4px 0;
+    }
+
+    .pay-btn {
+      display: block;
+      width: 100%;
+      background: #0f5132;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .pay-btn:hover {
+      background: #0b3e26;
+    }
+
+    #paymentInfo p.error {
+      color: red;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Queueless Canteen</div>
+  <button class="cta-btn" onclick="history.back()">Back</button>
+</nav>
+
+<div class="student-order-container">
+  <h2>Complete Your Payment</h2>
+  <div id="paymentInfo"></div>
+</div>
+
+<script>
+const orders = JSON.parse(localStorage.getItem("studentOrders")) || [];
+const orderNo = localStorage.getItem("currentPaymentOrder");
+const paymentInfo = document.getElementById("paymentInfo");
+
+if (!orderNo) {
+  paymentInfo.innerHTML = "<p class='error'>No order selected for payment.</p>";
+} else {
+  const order = orders.find(o => o.orderNo == orderNo);
+  if (!order) {
+    paymentInfo.innerHTML = "<p class='error'>Order not found.</p>";
+  } else {
+    paymentInfo.innerHTML = `
+      <p><strong>Order #${order.orderNo}</strong></p>
+      <p>Total: ₹${order.total}</p>
+      <ul>${order.items.map(i => `<li>${i.name} x${i.quantity}</li>`).join("")}</ul>
+      <button class="pay-btn" id="payBtn">Pay Now</button>
+    `;
+
+    document.getElementById("payBtn").onclick = function() {
+      const options = {
+        key: "RAZORPAY_KEY_HERE", // 🔴 replace with your Razorpay key
+        amount: order.total * 100,
+        currency: "INR",
+        name: "Queueless Canteen",
+        description: `Order #${order.orderNo}`,
+        handler: function(res){
+          order.status = "Paid";
+          localStorage.setItem("studentOrders", JSON.stringify(orders));
+          alert("Payment Successful!");
+          window.location.href = "student-order.html";
+        },
+        theme: { color: "#0f5132" }
+      };
+      new Razorpay(options).open();
+    }
+  }
+}
+</script>
+
+</body>
+</html>

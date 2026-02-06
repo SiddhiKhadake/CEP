@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Queueless Canteen</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo">Queueless Canteen</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="login.html" class="btn">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== LOGIN SECTION ===== -->
+  <section class="auth-container">
+
+    <!-- LEFT GREEN INFO -->
+    <div class="auth-info">
+      <h1>Welcome Back 👋</h1>
+      <p>
+        Login or register to order food without standing in queues.
+        Fast, smart and convenient.
+      </p>
+    </div>
+
+    <!-- RIGHT LOGIN CARD -->
+    <div class="auth-card">
+      <div class="auth-card-inner">
+
+        <!-- TABS -->
+        <div class="auth-tabs">
+          <button id="loginTab" class="active">Login</button>
+          <button id="registerTab">Register</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm">
+          <input type="email" placeholder="Email" required />
+          <div class="password-box">
+            <input type="password" id="loginPassword" placeholder="Password" required />
+            <span onclick="togglePassword('loginPassword')">👁</span>
+          </div>
+
+          <!-- ROLE SELECTION -->
+          <select id="loginRole" required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="canteen">Canteen Staff</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <div class="remember">
+            <input type="checkbox" id="rememberMe" />
+            <label for="rememberMe">Remember me</label>
+          </div>
+
+          <button type="submit" class="cta-btn full">Login</button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" style="display:none;">
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email" required />
+          <div class="password-box">
+            <input type="password" id="registerPassword" placeholder="Password" required />
+            <span onclick="togglePassword('registerPassword')">👁</span>
+          </div>
+
+          <select required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="canteen">Canteen Staff</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <button type="submit" class="cta-btn full">Register</button>
+        </form>
+
+      </div>
+    </div>
+
+  </section>
+
+  <script src="login.js"></script>
+</body>
+</html>

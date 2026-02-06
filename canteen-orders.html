@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Orders Dashboard | Queueless Canteen</title>
+  <link rel="stylesheet" href="canteen.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">Queueless Canteen</div>
+  <div class="nav-links">
+    <span class="user-name">Hello, Staff</span>
+    <button class="cta-btn">Logout</button>
+  </div>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="canteen-container">
+
+  <section class="orders-section">
+    <h2 class="section-title">Incoming Orders 🛎️</h2>
+
+    <!-- Orders Table -->
+    <div class="orders-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Student</th>
+            <th>Items</th>
+            <th>Total (₹)</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody">
+          <!-- Orders will be populated here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add sample order button for testing -->
+    <button class="add-order-btn">➕ Add Sample Order</button>
+  </section>
+
+</div>
+
+<script src="canteen-orders.js"></script>
+</body>
+</html>

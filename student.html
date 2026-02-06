@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard | Queueless Canteen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">Queueless Canteen</div>
+  <div class="nav-links">
+    <span class="user-name">Hello, Student</span>
+    <button class="cta-btn">Logout</button>
+  </div>
+</nav>
+
+<!-- MAIN CONTAINER -->
+<div class="student-container">
+
+  <!-- LEFT: MENU -->
+  <section class="menu-section">
+    <h2 class="section-title">Order Your Food 🍽️</h2>
+
+
+  <!-- CATEGORY TABS -->
+<div class="category-tabs">
+  <button class="active" onclick="filterCategory('breakfast', this)">Breakfast</button>
+  <button onclick="filterCategory('lunch', this)">Lunch</button>
+  <button onclick="filterCategory('snacks', this)">Snacks</button>
+  <button onclick="filterCategory('beverages', this)">Beverages</button>
+</div>
+
+
+    <!-- FOOD GRID -->
+    <div class="menu-grid">
+
+       <!-- Breakfast -->
+      <div class="menu-category" data-category="breakfast">
+        <h3>🍳 Breakfast</h3>
+        <div class="menu-item">
+          <img src="images/idli-sambar.jpg" alt="Idli Sambar">
+          <span>Idli Sambar</span>
+          <span class="price">₹30</span>
+          <button onclick="addToCart('Idli Sambar', 30)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/dosa.jpg" alt="Masala Dosa">
+          <span>Masala Dosa</span>
+          <span class="price">₹45</span>
+          <button onclick="addToCart('Masala Dosa', 45)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/poori-bhaji.jpg" alt="Poori Bhaji">
+          <span>Poori Bhaji</span>
+          <span class="price">₹40</span>
+          <button onclick="addToCart('Poori Bhaji', 40)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/upma.jpg" alt="Upma">
+          <span>Upma</span>
+          <span class="price">₹30</span>
+          <button onclick="addToCart('Upma', 30)">+</button>
+        </div>
+      </div>
+
+      <!-- Lunch -->
+      <div class="menu-category" data-category="lunch">
+        <h3>🍛 Lunch</h3>
+        <div class="menu-item">
+          <img src="images/veg-meals.jpg" alt="Veg Meals">
+          <span>Veg Meals</span>
+          <span class="price">₹70</span>
+          <button onclick="addToCart('Veg Meals', 70)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/veg-biryani.jpg" alt="Veg Biryani">
+          <span>Veg Biryani</span>
+          <span class="price">₹90</span>
+          <button onclick="addToCart('Veg Biryani', 90)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/curd-rice.jpg" alt="Curd Rice">
+          <span>Curd Rice</span>
+          <span class="price">₹40</span>
+          <button onclick="addToCart('Curd Rice', 40)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/lemon-rice.jpg" alt="Lemon Rice">
+          <span>Lemon Rice</span>
+          <span class="price">₹45</span>
+          <button onclick="addToCart('Lemon Rice', 45)">+</button>
+        </div>
+      </div>
+
+      <!-- Snacks -->
+      <div class="menu-category" data-category="snacks">
+        <h3>☕ Snacks</h3>
+        <div class="menu-item">
+          <img src="images/samosa.jpg" alt="Samosa">
+          <span>Samosa</span>
+          <span class="price">₹15</span>
+          <button onclick="addToCart('Samosa', 15)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/burger.jpg" alt="Burger">
+          <span>Burger</span>
+          <span class="price">₹50</span>
+          <button onclick="addToCart('Burger', 50)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/french-fries.jpg" alt="French Fries">
+          <span>French Fries</span>
+          <span class="price">₹45</span>
+          <button onclick="addToCart('French Fries', 45)">+</button>
+        </div>
+      </div>
+
+      <!-- Beverages -->
+      <div class="menu-category" data-category="beverages">
+        <h3>🥤 Beverages</h3>
+        <div class="menu-item">
+          <img src="images/tea.jpg" alt="Tea">
+          <span>Tea</span>
+          <span class="price">₹10</span>
+          <button onclick="addToCart('Tea', 10)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/coffee.jpg" alt="Coffee">
+          <span>Coffee</span>
+          <span class="price">₹15</span>
+          <button onclick="addToCart('Coffee', 15)">+</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/lime-juice.jpg" alt="Fresh Lime Juice">
+          <span>Fresh Lime Juice</span>
+          <span class="price">₹20</span>
+          <button onclick="addToCart('Lime Juice', 20)">+</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RIGHT: CART -->
+   <!-- RIGHT: CART -->
+<aside class="cart-section">
+  <h3>Your Cart 🛒</h3>
+  <div id="cartItems" class="cart-items">
+    <p class="empty-cart">Cart is empty</p>
+  </div>
+
+  <!-- Only one cart-footer -->
+  <div class="cart-footer">
+    <div class="total">
+      Total: ₹<span id="totalPrice">0</span>
+    </div>
+    <button class="cta-btn full" onclick="placeOrder()">Place Order</button>
+    <button class="cta-btn full" onclick="goToOrderStatus()">Order Status</button>
+  </div>
+
+  <div class="order-status">
+    <h4>Order Status</h4>
+    <div class="status-steps">
+      <span class="step active">Pending</span>
+      <span class="step">Preparing</span>
+      <span class="step">Ready</span>
+      <span class="step">Collected</span>
+    </div>
+  </div>
+</aside>
+
+
+
+<script src="student.js"></script>
+</body>
+</html>

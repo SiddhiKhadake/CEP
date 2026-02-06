@@ -1,0 +1,162 @@
+/* ===== BODY ===== */
+body {
+  background: #f4f7f6;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #0f5132;
+  color: white;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.navbar .cta-btn {
+  background: #ff9f45;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.navbar .cta-btn:hover {
+  background: #f08c2e;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.student-order-container {
+  padding: 120px 40px 40px 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== ORDER CARD ===== */
+.order-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+}
+
+.order-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f5132;
+}
+
+.order-items {
+  font-size: 15px;
+  color: #495057;
+}
+
+.order-items ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.status-steps {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.status-steps .step {
+  min-width: 80px;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #e9ecef;
+  color: #495057;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.status-steps .step.active {
+  background: #0f5132;
+  color: #fff;
+}
+
+.pay-btn {
+  margin-top: 10px;
+  background: #ff9f45;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.pay-btn:hover {
+  background: #f08c2e;
+}
+
+/* ===== TOAST NOTIFICATION ===== */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0f5132;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 2000;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .student-order-container {
+    padding: 120px 20px 20px 20px;
+  }
+
+  .order-info {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .status-steps .step {
+    min-width: 60px;
+    font-size: 12px;
+  }
+
+  .pay-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
